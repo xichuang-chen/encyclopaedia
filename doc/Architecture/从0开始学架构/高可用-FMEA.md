@@ -8,7 +8,7 @@ FMEA(Failure Mode and effects analysis) 具体方法：
 *其实就是列出来所有的case,然后分析*  
 
 ### 例子  
-![img.png](img.png)  
+![img.png](./assets/FMEA.png)  
 **说明**
 - 功能点，是针对用户来说的，不是系统各模块来说的  
 - 风险程度, 严重程度 ✖️ 故障概率， 比如地震啥的，虽然严重程度高，但是概率低，所以风险也不高  
