@@ -11,6 +11,7 @@
     - [Redis](./doc/Architecture/从0开始学架构/Redis.md)
 - 高可用架构
   - [吃透CAP](./doc/Architecture/从0开始学架构/高可用结构-CAP.md)
+  - [FMEA-排除高可用性隐患的利器](./doc/Architecture/从0开始学架构/高可用-FMEA.md)
 
 ## Http
 - [Http](./doc/网络/http.md)  
