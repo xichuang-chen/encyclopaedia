@@ -13,6 +13,7 @@
   - [吃透CAP](./doc/Architecture/从0开始学架构/高可用结构-CAP.md)
   - [FMEA-排除高可用性隐患的利器](./doc/Architecture/从0开始学架构/高可用-FMEA.md)
   - [高可用存储架构](./doc/Architecture/从0开始学架构/高可用存储架构.md)
+  - [计算高可用架构](./doc/Architecture/从0开始学架构/计算高可用架构.md)
 
 ## Http
 - [Http](./doc/网络/http.md)  
