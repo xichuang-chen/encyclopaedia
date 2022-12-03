@@ -16,6 +16,7 @@
   - [计算高可用架构](./doc/Architecture/从0开始学架构/计算高可用架构.md)
   - [业务高可用的保障-异地多活架构](./doc/Architecture/从0开始学架构/计算高可用架构.md)
   - [接口级故障](./doc/Architecture/从0开始学架构/接口级故障.md)
+  - [可扩展架构](./doc/Architecture/从0开始学架构/可扩展架构.md)
 
 ## Http
 - [Http](./doc/网络/http.md)  
