@@ -87,3 +87,8 @@ Cluster模式实现了Redis的分布式存储，即每台节点存储不同的�
 - 所有的redis节点彼此互联(PING-PONG机制),内部使用二进制协议优化传输速度和带宽
 - 节点的fail是通过集群中超过半数的节点检测失效时才生效
 - 客户端与redis节点直连,不需要中间代理层.客户端不需要连接集群所有节点,连接集群中任何一个可用节点即可
+
+![img.png](img.png)  
+![img_1.png](img_1.png)  
+![img_2.png](img_2.png)  
+![img_3.png](img_3.png)
