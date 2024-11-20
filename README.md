@@ -39,6 +39,9 @@
 - [Jetty Netty](./doc/reactor/Jetty-Netty.md)
 - [Netty](./doc/reactor/Netty.md)
 
+## Security
+- [Auth0](./doc/security/auth0.md)
+
 ## Kafka
 - [Kafka](./doc/kafka/kafka.md)
 
