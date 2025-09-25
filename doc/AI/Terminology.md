@@ -6,10 +6,7 @@
 **能力：** 主要是“理解语言 + 生成语言”，属于原生模型。
 
 👉 举例：
-- LLaMA2（Meta 开源）
-- GPT-4（OpenAI 云端）
-- Claude 3（Anthropic）
-这些都属于 LLM。  
+[当前市面流行的大模型](./LLM.md)
 
 
 LLM：像 GPT-4、LLaMA2、Claude → 原生模型，大脑。  
@@ -22,20 +19,6 @@ LLM：像 GPT-4、LLaMA2、Claude → 原生模型，大脑。
 - 问答对话
 - 文本生成（文章、代码）
 - 翻译、总结
-
-#### LLM，Model, Agent
-- Model: 指调用open ai时，指定的model。其实就是LLM
- ```json
-{
-  "model": "gpt-4o-mini",
-  "messages": [
-    {"role": "user", "content": "帮我写一个Python冒泡排序"}
-  ]
-}
-
-```
-- Agent：在 LLM 上加工具、记忆、逻辑 → 会执行任务的助手。
-- ChatGPT：就是一个 Agent 产品（因为它用 LLM + 工具 + 记忆 + UI 封装出来的）。
 
 ### Agent
 **定义：**  
@@ -77,18 +60,9 @@ OpenAI、Anthropic、Google 等厂商都在推动 从单纯的模型调用
 → Agent 框架。  
 未来 AI 可能不是单一对话模型，而是一个能帮你完成复杂任务的 数字员工。
 
-**现实中 Agent 的“出生方式”**  
-公司自己研发：  
-- 比如微软 Copilot，其实就是把 GPT 模型 + Office 工具 API + UI 结合起来。
 
-基于框架搭建：
-- 开发者用 LangChain、LlamaIndex、Haystack 等开源框架，快速定制一个 Agent。
-
-直接用官方 API：
-- OpenAI 的 Assistants API 就是官方提供的“Agent 搭建平台”，开发者只要定义好 指令 + 工具 + 数据，模型就能变成一个 Agent。
-
-#### 本地搭建Agent
-
+#### 创建Agent
+[如果一个公司，想要定制一个自己的agent， 应该如何着手](./setup-agent.md)  
 **有三种方式搭建本地Agent**  
 - Function Calling
   - 使用简单，单一的任务
@@ -99,83 +73,34 @@ OpenAI、Anthropic、Google 等厂商都在推动 从单纯的模型调用
   - “云端记忆+内置工具，只要丢任务就行” → 快速做持久化助手
 
 
-
-下边这个例子是使用 LangChain 框架搭建 agent
-**🛠️ 1. 你需要准备的环境**  
-编程语言：推荐 Python（生态成熟，AI 框架最多）。  
-硬件：普通电脑即可（如果要跑大模型，最好有 GPU；否则可以调用 API）。  
-依赖： Python 3.9+  pip 包管理工具
-
-**🧩 2. 核心组件（搭建 Agent 必须的）**  
-一个 Agent 一般由以下部分组成：
-- 大脑（LLM）  
-  - 本地模型：如 LLaMA2、Mistral、Qwen、ChatGLM，可以用 Ollama 或 vLLM 启动。 
-  - API 调用：如 OpenAI 的 GPT、Anthropic 的 Claude。
-
-- 工具调用（Tools）
-  - 浏览器、数据库、Python 解释器、文件操作等。
-
-- 记忆（Memory）
-  - 短期记忆：对话上下文。 
-  - 长期记忆：向量数据库（如 Chroma、Weaviate、Milvus）。
-
-- 逻辑框架（Agent 框架）
-  - LangChain （最流行，功能全面） 
-  - LlamaIndex （偏重知识接入） 
-  - AutoGen （微软开源，支持多 Agent 协作）
-
-**⚙️ 3. 本地搭建流程（一个最小可用的例子）**  
-假设你用 Ollama + LangChain 在本地跑一个简单 Agent：  
-步骤 1：安装环境
-```bash
-# 安装 ollama（本地模型运行器）
-brew install ollama   # Mac
-# 或者到 https://ollama.ai 下载
-
-# 安装 LangChain 和依赖
-pip install langchain langchain-community chromadb
+### LLM，Model, Agent 区别
+- Model: 指调用open ai时，指定的model。其实就是LLM
+ ```json
+{
+  "model": "gpt-4o-mini",
+  "messages": [
+    {"role": "user", "content": "帮我写一个Python冒泡排序"}
+  ]
+}
 ```
+- Agent：在 LLM 上加工具、记忆、逻辑 → 会执行任务的助手。
+- ChatGPT：就是一个 Agent 产品（因为它用 LLM + 工具 + 记忆 + UI 封装出来的）。
 
-步骤 2：下载一个本地模型
-```bash
-ollama pull llama2
-```
-
-步骤 3：写一个简单的 Agent 脚本
-```bash
-from langchain.llms import Ollama
-from langchain.agents import initialize_agent, load_tools
-
-# 1. 载入本地模型（大脑）
-llm = Ollama(model="llama2")
-
-# 2. 加载工具（比如搜索、计算器）
-tools = load_tools(["serpapi", "llm-math"], llm=llm)
-
-# 3. 初始化 Agent
-agent = initialize_agent(
-    tools, llm, agent="zero-shot-react-description", verbose=True
-)
-
-# 4. 运行 Agent
-agent.run("帮我查一下明天北京的天气，并计算适合穿什么衣服")
-```
-
-👉 这样你就有了一个最小的“本地 Agent”，它会：
-- 理解你的问题 
-- 调用工具（搜索、计算） 
-- 给出最终答案
-
-**🚀 4. 进阶玩法**
-- 加知识库：用 LlamaIndex 或 Chroma，把公司文档接入，让 Agent 变成“企业客服”。 
-- 多 Agent 协作：用 AutoGen 搭建多个 Agent，让它们分工（比如“研究员 Agent + 程序员 Agent”）。 
-- 可视化界面：用 Gradio 或 Streamlit 搭建前端界面，让你像用 ChatGPT 一样操作。
-
-**🎯 总结**
-- 最小路径：Ollama（本地模型） + LangChain（Agent 框架）。
-- 扩展路径：加上向量数据库（长期记忆）、工具 API（行动能力）、界面（用户交互）。 
-- 最终效果：你的本地 Agent 不仅能聊天，还能查资料、写代码、回答和你业务相关的问题。
-
+---
+白话：  
+LLM 是通过大量数据训练出来的模型，使它有了一些能力，比如翻译等等能力。但是它的能力是基于训练它的数据的，如果你要问他一些实时的东西，它是不能给出正确答案的，它
+只是基于它的思考能力，给出一个结果  
+但是Agent，是在LLM基础上又附带了很多能力，比如查询当前时间，天气等的能力，这是Agent与大模型的重要区别,Agent可以
+- 让 LLM 查询你们公司的私有数据，然后根据私有数据给出结果， 这是主流大模型所不具有的，因为他们训练时没有用你们公司私有数据
+- 让 LLM 调用第三方api获取定制化数据或者实时数据，这是主流大模型所不具有的
+---
+测试：  
+按照上面说的，LLM是由大量数据训练而成，所以它的知识只局限于训练它的数据所具有的能力，那么它是没有获取实时确定信息的能力的，它只能推断  
+- 询问Gemini(认为是功能强大的agent)当前时间  
+![img.png](img.png)  
+这是因为 Google 团队在做 Gemini 时给LLM添加了tools 可以获取当前时间
+- 询问 Gemini 使用的 LLM 当前时间
+![img_1.png](img_1.png)  
 
 ### RAG
 RAG 是 Retrieval-Augmented Generation（检索增强生成） 的缩写  
@@ -195,4 +120,5 @@ RAG 的核心理念是：
 - Generation（生成）  
 语言模型基于问题和相关文档生成最终回答。
 
+### 一些疑问回答
 
