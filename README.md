@@ -39,7 +39,7 @@
 - [K8s](https://github.com/xichuang-chen/my-k8s)  
 
 ## AI
-- [AI](./doc/AI/Terminology.md)  
+- [AI第一课](./doc/AI/Terminology.md)  
 
 ## Git
 - [Config the multiple account in local](github-config.md)
